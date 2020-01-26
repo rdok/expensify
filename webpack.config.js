@@ -32,7 +32,8 @@ module.exports = (env, argv) => {
             devServer: {
                 contentBase: path.resolve(__dirname, 'public'),
                 host: '0.0.0.0',
-                hot: true
+                hot: true,
+                historyApiFallback: true
             }
         }
     }

@@ -23,8 +23,8 @@ jobs:
           echo ::set-env name=GID::$(id -g)
       - name: Build
         run: |
-          docker-compose run --rm node yarn
-          docker-compose run --rm node yarn run build:prod
+          docker-compose run node yarn
+          docker-compose run -e BASENAME=/expensify node yarn run build:prod
       - name: Sync with S3
         run: aws s3 sync ./public s3://training-apps-rdok/expensify --delete
       - name: Create CloudFront invalidation

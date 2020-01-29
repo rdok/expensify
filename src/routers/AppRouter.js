@@ -7,7 +7,7 @@ import {
 } from './../components/index'
 
 const AppRouter = () => (
-    <BrowserRouter>
+    <BrowserRouter basename={BASENAME}>
         <div>
             <Header/>
         </div>

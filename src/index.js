@@ -12,5 +12,4 @@ const store = createStore((state = {count: 1}) => {
 
 console.log((store.getState()))
 
-
 ReactDOM.render(<AppRouter/>, document.getElementById('root'))

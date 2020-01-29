@@ -1,8 +1,14 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = (env, argv) => {
 
     let exports = {
+        plugins: [
+            new webpack.DefinePlugin({
+                BASENAME: JSON.stringify(process.env.BASENAME)
+            })
+        ],
         entry: './src/index.js',
         output: {
             path: path.resolve(__dirname, 'public'),

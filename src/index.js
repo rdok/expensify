@@ -9,9 +9,13 @@ import AppRouter from './routers/AppRouter'
 const store = createStore((state = {count: 0}, action) => {
     switch (action.type) {
         case 'INCREMENT':
-            return {count: state.count + 1}
+            const incrementBy = action.incrementBy || 1
+            return {count: state.count + incrementBy}
         case 'DECREMENT':
-            return {count: state.count - 1}
+            const decrementBy = action.decrementBy || 1
+            return {count: state.count - decrementBy}
+        case 'SET':
+            return {count: action.value}
         case 'RESET':
             return {count: 0}
         default:
@@ -19,11 +23,21 @@ const store = createStore((state = {count: 0}, action) => {
     }
 })
 
-store.dispatch({type: 'INCREMENT'})
-store.dispatch({type: 'INCREMENT'})
-store.dispatch({type: 'DECREMENT'})
-store.dispatch({type: 'RESET'})
+const unsubscribe = store.subscribe(() => {
+    console.log('subscribe', store.getState())
+})
 
-console.log((store.getState()))
+// store.dispatch({type: 'INCREMENT', incrementBy: 5})
+// store.dispatch({type: 'INCREMENT'})
+// store.dispatch({type: 'INCREMENT'})
+
+// store.dispatch({type: 'DECREMENT'})
+// store.dispatch({type: 'DECREMENT', decrementBy: 3})
+
+store.dispatch({type: 'SET', value: 2077})
+
+unsubscribe()
+
+store.dispatch({type: 'RESET'})
 
 ReactDOM.render(<AppRouter/>, document.getElementById('root'))

@@ -1,7 +1,5 @@
 # Expensify
-![Deployment](https://github.com/rdok/__project_name__/workflows/CI/badge.svg) 
-
-### Specs
+![Deployment](https://github.com/rdok/expensify/workflows/CI/badge.svg) 
 
 ### Quickstart
 

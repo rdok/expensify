@@ -3,8 +3,24 @@ import ReactDOM from 'react-dom'
 import 'normalize.css/normalize.css'
 import './styles/styles.sass'
 
-import {createStore} from 'redux'
+import {createStore, combineReducers} from 'redux'
 import AppRouter from './routers/AppRouter'
+
+const demoteState = {
+   expenses: [{
+      id: 'unique-id',
+      description: 'Loreum Ipsum - Description',
+      notes: 'Lorem Ipsum - Notes',
+      amount: 54500,
+      createdAt: 0
+   }],
+   filters: {
+      text: 'rent',
+      sortBy: 'amount',  // data|amount
+      startDate: undefined,
+      endDate: undefined,
+   }
+}
 
 const incrementCount = ({incrementBy = 1} = {}) => ({
     type: 'INCREMENT',
@@ -22,20 +38,22 @@ const setCount = (value) => ({
 
 const resetCount = () => ({ type: 'RESET' })
 
-const store = createStore((state = {count: 0}, action) => {
-    switch (action.type) {
+const countReducer = (state = {count: 0}, {type, incrementBy, decrementBy, value}) => {
+    switch (type) {
         case 'INCREMENT':
-            return {count: state.count + action.incrementBy}
+            return {count: state.count + incrementBy}
         case 'DECREMENT':
-            return {count: state.count - action.decrementBy}
+            return {count: state.count - decrementBy}
         case 'SET':
-            return {count: action.value}
+            return {count: value}
         case 'RESET':
             return {count: 0}
         default:
             return state
     }
-})
+}
+
+const store = createStore(countReducer)
 
 const unsubscribe = store.subscribe(() => {
     console.log('subscribe', store.getState())

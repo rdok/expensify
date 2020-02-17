@@ -2,67 +2,47 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import 'normalize.css/normalize.css'
 import './styles/styles.sass'
-import {
-    expensesReducer, addExpense, removeExpense, editExpense
-} from './reducers/expenses'
-import {
-    filtersReducer, setTextFilter, sortByAmount, sortByDate,
-    setStartDate, setEndDate
-} from './reducers/filters'
 
-import {createStore, combineReducers} from 'redux'
+import {addExpense, removeExpense, editExpense} from './actions/expenses'
+import getVisibleExpenses from './selectors/expenses'
+
+
 import AppRouter from './routers/AppRouter'
 
+import {
+    setTextFilter, sortByAmount, sortByDate, setStartDate, setEndDate
+} from './actions/filters'
+import configureStore from './store/configureStore'
 
-const getVisibleExpenses = (expenses, {text, sortBy, startDate, endDate}) => {
-    return expenses.filter((expense) => {
-        const startDateMatch = typeof startDate !== 'number'
-            || expense.createdAt >= startDate;
-        const endDateMatch = typeof endDate !== 'number'
-            || expense.createdAt <= endDate;
+const store = configureStore()
 
-        const textMatch = expense.description.toLocaleLowerCase()
-            .includes(text.toLowerCase())
+console.log(store.getState())
 
-        return startDateMatch && endDateMatch && textMatch
-    }).sort((firstExpense, secondExpense) => {
-        switch (sortBy) {
-            case 'date':
-                return firstExpense.createdAt < secondExpense.createdAt
-            case 'amount':
-                return firstExpense.amount < secondExpense.amount
-        }
-    })
-}
-
-const store = createStore(
-    combineReducers({expenses: expensesReducer, filters: filtersReducer})
-)
 
 store.subscribe(() => {
     const state = store.getState()
     const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
-
     console.log(visibleExpenses)
 })
 
-const dispatchedExpense = store
-    .dispatch(addExpense({description: 'RentinG', amount: 100, createdAt: 1000}))
-store.dispatch(addExpense({
-    description: 'Training',
-    amount: 200,
-    createdAt: -1000
-}))
+store.dispatch(addExpense({description: 'Water bill', amount: 100, createdAt: 1000}))
+store.dispatch(addExpense({description: 'Gas bill', amount: 200, createdAt: 2000}))
+store.dispatch(setTextFilter('gas'))
+
+// store.dispatch(addExpense({
+//     description: 'Training',
+//     amount: 200,
+//     createdAt: -1000
+// }))
 
 
 // store.dispatch(removeExpense(dispatchedExpense))
 // store.dispatch(editExpense(dispatchedExpense.expense, {description: 'NewDescription'}))
 
-// store.dispatch(setTextFilter('new-text-filter'))
 // store.dispatch(setTextFilter())
 
-store.dispatch(sortByAmount())
-store.dispatch(sortByDate())
+// store.dispatch(sortByAmount())
+// store.dispatch(sortByDate())
 // store.dispatch(sortByAmount())
 
 // store.dispatch(setTextFilter('notfound'))

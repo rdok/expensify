@@ -19,7 +19,6 @@ const store = configureStore()
 
 store.subscribe(() => {
     const state = store.getState()
-    console.log(state)
     const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
 })
 
@@ -88,8 +87,6 @@ const requireAuth = (WrappedComponent) => {
 }
 
 const AuthInfo = requireAuth(Info)
-
-// <AuthInfo isAdmin={true} info="Details Content" isAuthenticated={false}/>,
 
 const jsx = (<Provider store={store}> <AppRouter/> </Provider>)
 

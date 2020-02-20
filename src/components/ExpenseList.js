@@ -1,25 +1,20 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import ExpenseListItem from './ExpenseListItem'
+import selectExpenses from '../selectors/expenses'
 
-const ExpenseList = (props) => (
+const ExpenseList = ({expenses}) => (
     <div>
-        <h1> Expense List </h1>
-        {props.filters.text}
-        {/*{props.filters.length}*/}
-        <ul>
-            <li><Link to="/edit/cyberpunk-2077">Cyberpunk 2077</Link></li>
-            <li><Link to="/edit/witcher-3">The Witcher 3</Link></li>
-        </ul>
+        <h2> Expense List </h2>
+        {expenses.map((expense) => (
+            <ExpenseListItem key={expense.id} {...expense} />
+        ))}
     </div>
 )
 
-const mapStateToProps = (state) => {
-    return {
-        expenses: state.expenses,
-        filters: state.filters
-    }
-}
+const mapStateToProps = ({expenses, filters}) => ({
+    expenses: selectExpenses(expenses, filters)
+})
 
 export default connect(mapStateToProps)(ExpenseList)
 

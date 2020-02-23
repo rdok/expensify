@@ -9,7 +9,7 @@ module.exports = (env, argv) => {
                 BASENAME: JSON.stringify(process.env.BASENAME)
             })
         ],
-        entry: './src/index.js',
+        entry: './src/app.js',
         output: {
             path: path.resolve(__dirname, 'public'),
             filename: 'bundle.js'

@@ -1,5 +1,4 @@
 export {DashboardPage} from './../components/DashboardPage'
-export {AddExpensePage} from './../components/AddExpensePage'
 export {EditExpensePage} from './../components/EditExpensePage'
 export {HelpPage} from './../components/HelpPage'
 export {NotFoundPage} from './../components/NotFoundPage'

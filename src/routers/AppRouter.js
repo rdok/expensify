@@ -2,9 +2,11 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import {
-    DashboardPage, AddExpensePage, EditExpensePage, HelpPage, NotFoundPage,
+    DashboardPage, EditExpensePage, HelpPage, NotFoundPage,
     Header
 } from './../components/index'
+
+import AddExpensePage from "../components/AddExpensePage"
 
 const AppRouter = () => (
     <BrowserRouter basename={BASENAME}>

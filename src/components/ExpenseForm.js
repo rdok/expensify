@@ -16,6 +16,17 @@ export default class ExpenseForm extends React.Component {
         calendarFocused: false
     }
 
+    constructor(props) {
+        super(props)
+
+        if (props.expense) {
+            this.state ={
+                ...props.expense,
+                amount: (props.expense.amount / 100).toString()
+            }
+        }
+    }
+
     onDescriptionChange = (e) => {
         const description = e.target.value
         this.setState(() => ({description}))
@@ -58,10 +69,13 @@ export default class ExpenseForm extends React.Component {
 
         this.setState({errors})
 
+        errors.length === 0 || console.log(errors)
+
         errors.length === 0 && this.props.onSubmit({
+            id: this.state.id,
             description: this.state.description,
             amount: parseFloat(this.state.amount) * 100,
-            createdAt: this.state.createdAt.valueOf(),
+            createdAt: this.state.createdAt,
             note: this.state.note
         })
     }
@@ -95,7 +109,7 @@ export default class ExpenseForm extends React.Component {
                     value={this.state.note}
                     onChange={this.onNoteChange}
                 />
-                <button>Add</button>
+                <button>{this.props.submitBtnValue}</button>
             </form>
         </div>
     }

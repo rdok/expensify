@@ -20,7 +20,7 @@ export default class ExpenseForm extends React.Component {
         super(props)
 
         if (props.expense) {
-            this.state ={
+            this.state = {
                 ...props.expense,
                 amount: (props.expense.amount / 100).toString()
             }

@@ -37,29 +37,6 @@ store.dispatch(addExpense({
     createdAt: moment().subtract(5, 'day')
 }))
 
-// store.dispatch(removeExpense(dispatchedExpense))
-// store.dispatch(editExpense(dispatchedExpense.expense, {description: 'NewDescription'}))
-
-// store.dispatch(setTextFilter())
-
-// store.dispatch(sortByAmount())
-// store.dispatch(sortByDate())
-// store.dispatch(sortByAmount())
-
-// store.dispatch(setTextFilter('notfound'))
-// store.dispatch(setTextFilter('en'))
-// store.dispatch(setTextFilter('ing'))
-
-// store.dispatch(setStartDate(1150))
-// store.dispatch(setStartDate(500))
-// store.dispatch(setStartDate(-1001))
-// store.dispatch(setEndDate(125))
-// store.dispatch(setEndDate())
-// store.dispatch(setStartDate())
-
-// ReactDOM.render(<AppRouter/>, document.getElementById('root'))
-
-
 const Info = ({info}) => (
     <div>
         <h1>Info</h1>
@@ -79,15 +56,12 @@ const withAdminWarning = (WrappedComponent) => {
 const AdminInfo = withAdminWarning(Info)
 
 const requireAuth = (WrappedComponent) => {
-    return (props) => (
-        <div>
-            {
-                props.isAuthenticated ? (<p>Redirect to auth page</p>)
-                    : <WrappedComponent {...props}/>
-            }
-
-        </div>
-    )
+    return (props) => <div>
+        {
+            props.isAuthenticated ? (<p>Redirect to auth page</p>)
+                : <WrappedComponent {...props}/>
+        }
+    </div>
 }
 
 const AuthInfo = requireAuth(Info)

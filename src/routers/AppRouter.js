@@ -1,10 +1,7 @@
-import React from 'react';
+import React from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
-import {
-    DashboardPage, HelpPage, NotFoundPage,
-    Header
-} from './../components/index'
+import {DashboardPage, Header, HelpPage, NotFoundPage} from './../components/index'
 import EditExpensePage from "../components/EditExpensePage"
 
 import AddExpensePage from "../components/AddExpensePage"

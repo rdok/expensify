@@ -8,10 +8,10 @@ export default (state = defaultState, {type, expense}) => {
             return state.filter(({id}) => id !== expense.id)
         case 'EDIT_EXPENSE':
             return state.map((item) => {
-                return item.id === expense.id ? {...item, ...expense} : expense;
+                return item.id === expense.id ? {...item, ...expense} : expense
             })
         default:
-            return state;
+            return state
     }
 }
 

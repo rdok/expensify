@@ -1,8 +1,10 @@
+import moment from 'moment'
+
 const defaultState = {
     text: '',
     sortBy: 'date',
-    startDate: undefined,
-    endDate: undefined
+    startDate: moment().startOf('month'),
+    endDate: moment().endOf('month'),
 }
 
 export default (state = defaultState, {
@@ -20,6 +22,6 @@ export default (state = defaultState, {
         case 'SET_END_DATE':
             return {...state, endDate}
         default:
-            return state;
+            return state
     }
 }

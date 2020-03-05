@@ -8,7 +8,7 @@ const EditExpensePage = ({expense, dispatch, history}) => <div>
         submitBtnValue='Update'
         expense={expense}
         onSubmit={(expense) => {
-            dispatch(editExpense({id: expense.id}, expense))
+            dispatch(editExpense({id: expense.id}, data))
             history.push('/')
         }}
     />

@@ -4,8 +4,10 @@
 ### Quickstart
 
 ```
-docker-compose run --rm node yarn
+source aliases.sh
+yarn 
 docker-compose up -d
+yarn test-watch
 
 http://127.0.0.1:8080/
 ```

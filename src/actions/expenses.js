@@ -1,15 +1,14 @@
 import uuid from 'uuid'
+import moment from "moment"
 
-export const addExpense = (
-    {description = '', note = '', amount = 0, createdAt = 0}
-) => ({
+export const addExpense = (expense) => ({
     type: 'ADD_EXPENSE',
-    expense: {id: uuid(), description, note, amount, createdAt}
+    expense: {id: uuid(), createdAt: moment(), ...expense}
 })
 
-export const editExpense = ({id}, data) => ({
+export const editExpense = (expense, data) => ({
     type: 'EDIT_EXPENSE',
-    expense: {id, ...data}
+    expense: {id: expense.id, createdAt: expense.createdAt, ...data}
 })
 
-export const removeExpense = ({expense}) => ({type: 'REMOVE_EXPENSE', expense})
+export const removeExpense = ({id}) => ({type: 'REMOVE_EXPENSE', id})

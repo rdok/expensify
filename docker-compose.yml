@@ -4,7 +4,9 @@ services:
 
   dev-server:
     restart: always
-    image: node:13-alpine3.11
+    build:
+      dockerfile: Dockerfile
+      context: .
     command: yarn run dev-server
     working_dir: /app
     volumes:
@@ -14,7 +16,9 @@ services:
 
   node:
     restart: always
-    image: node:13-alpine3.11
+    build:
+      dockerfile: Dockerfile
+      context: .
     command: tail -f /dev/null
     working_dir: /app
     environment:

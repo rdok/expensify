@@ -8,7 +8,9 @@
   "license": "MIT",
   "scripts": {
     "dev-server": "webpack-dev-server",
-    "build:prod": "webpack -p --env production"
+    "build:prod": "webpack -p --env production",
+    "test": "jest",
+    "test-watch": "yarn run test -- --watch"
   },
   "dependencies": {
     "@babel/cli": "^7.8.3",
@@ -19,6 +21,7 @@
     "@babel/runtime": "^7.8.4",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
+    "jest": "^25.1.0",
     "live-server": "^1.2.1",
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",

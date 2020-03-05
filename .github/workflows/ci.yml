@@ -21,9 +21,12 @@ jobs:
         run: |
           echo ::set-env name=ID::$(id -u)
           echo ::set-env name=GID::$(id -g)
+      - name: Install Node depedencies
+        run: docker-compose run node yarn
+      - name: Test
+        run: docker-compose run node yarn run test
       - name: Build
-        run: |
-          docker-compose run node yarn
+        run:
           docker-compose run -e BASENAME=/expensify node yarn run build:prod
       - name: Sync with S3
         run: aws s3 sync ./public s3://training-apps-rdok/expensify --delete

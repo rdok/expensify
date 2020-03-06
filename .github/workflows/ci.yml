@@ -21,7 +21,7 @@ jobs:
         run: |
           echo ::set-env name=ID::$(id -u)
           echo ::set-env name=GID::$(id -g)
-      - name: Install Node depedencies
+      - name: Install Node dependencies
         run: docker-compose run node yarn
       - name: Test
         run: docker-compose run node yarn run test

@@ -1,31 +1,25 @@
 export default (expenses, filters) => {
-    return expenses.filter((expense) => {
-        const includesDescription = expense.description.toLowerCase()
-            .includes(filters.text.toLowerCase())
+    if (!filters) return expenses
+    if (filters.text) expenses = filter(expenses, filters)
+    if (filters.date) expenses = sort(expenses)
 
-        return includesDescription ||
-            expense.note.toLowerCase().includes(filters.text.toLowerCase())
+    return expenses
+}
+
+function filter(expenses, filters) {
+    return expenses.filter((expense) => {
+        const text = filters.text.toLowerCase()
+
+        return ['description', 'note'].find(field => {
+            return expense[field].toLowerCase().includes(text)
+        }) !== undefined
     })
 }
 
-// export default (expenses, {text, sortBy, startDate, endDate}) => {
-//     return expenses.filter((expense) => {
-//         const startDateMatches = ! moment.isMoment(startDate)
-//             || startDate.isSameOrBefore(expense.createdAt)
-//
-//         const endDateMatches = ! moment.isMoment(endDate)
-//             || endDate.isSameOrAfter(expense.createdAt)
-//
-//         const textMatches = expense.description.toLocaleLowerCase()
-//             .includes(text.toLowerCase())
-//
-//         return startDateMatches && endDateMatches && textMatches
-//     }).sort((firstExpense, secondExpense) => {
-//         switch (sortBy) {
-//             case 'date':
-//                 return firstExpense.createdAt.isBefore(secondExpense.createdAt)
-//             case 'amount':
-//                 return firstExpense.amount < secondExpense.amount
-//         }
-//     })
-// }
+
+function sort(expenses) {
+    return expenses.sort((expense, nextExpense) => {
+        return expense.createdAt.isBefore(nextExpense.createdAt) ? 1 : -1
+    })
+}
+

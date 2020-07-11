@@ -1,4 +1,4 @@
-name: CI
+name: prod-deploy
 
 on: [push]
 
@@ -21,14 +21,7 @@ jobs:
         run: |
           echo ::set-env name=ID::$(id -u)
           echo ::set-env name=GID::$(id -g)
-      - name: Install Node dependencies
-        run: docker-compose run node yarn
-      - name: Test
-        run: docker-compose run node yarn run test
-      - name: Build
-        run:
-          docker-compose run -e BASENAME=/expensify node yarn run build:prod
-      - name: Sync with S3
-        run: aws s3 sync ./public s3://training-apps-rdok/expensify --delete
-      - name: Create CloudFront invalidation
-        run: aws cloudfront create-invalidation  --distribution-id "${AWS_CLOUDFRONT_DISTRIBUTION_ID}" --paths /expensify/index.html /expensify/bundle.js
+      - name: Up, install dependencies, and test
+        run: make up install test
+      - name: Build, Deploy, and invalidate CDN
+        run: make build deploy cdn

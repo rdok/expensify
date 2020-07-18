@@ -2,18 +2,6 @@ version: '3'
 
 services:
 
-  dev-server:
-    restart: always
-    build:
-      dockerfile: Dockerfile
-      context: .
-    command: yarn run dev-server
-    working_dir: /app
-    volumes:
-      - .:/app
-    ports:
-      - "8080:8080"
-
   node:
     restart: always
     build:
@@ -25,3 +13,5 @@ services:
       - YARN_CACHE_FOLDER=/app/node_cache/yarn
     volumes:
       - .:/app
+    ports:
+      - "8080:8080"

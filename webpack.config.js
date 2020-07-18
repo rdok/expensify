@@ -9,6 +9,9 @@ module.exports = (env) => {
       }),
     ],
     entry: './src/app.js',
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
     output: {
       path: path.resolve(__dirname, 'public'),
       filename: 'bundle.js',
@@ -17,7 +20,7 @@ module.exports = (env) => {
       rules: [
         {
           loader: 'babel-loader',
-          test: /\.js$/,
+          test: /\.jsx?$/,
           exclude: /node_modules/,
         },
         {

@@ -23,7 +23,7 @@ class ExpensesListFilter extends React.Component {
   }
 
   render() {
-    const { filters, dispatch, onDatesChange } = this.props;
+    const { filters, dispatch } = this.props;
     const { calendarFocused } = this.state;
     return (
       <div>
@@ -54,7 +54,7 @@ class ExpensesListFilter extends React.Component {
           endDate={filters.endDate}
           startDateId="start-date"
           endDateId="end-date"
-          onDatesChange={onDatesChange}
+          onDatesChange={this.onDatesChange}
           focusedInput={calendarFocused}
           onFocusChange={this.onFocusChange}
           numberOfMonths={1}
@@ -68,8 +68,12 @@ class ExpensesListFilter extends React.Component {
 
 ExpensesListFilter.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  filters: PropTypes.func.isRequired,
-  onDatesChange: PropTypes.func.isRequired,
+  filters: PropTypes.shape({
+    text: PropTypes.string,
+    sortBy: PropTypes.string,
+    startDate: PropTypes.shape({ fromNow: PropTypes.func }).isRequired,
+    endDate: PropTypes.shape({ fromNow: PropTypes.func }).isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({

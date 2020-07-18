@@ -23,7 +23,7 @@ const ExpenseListItem = ({
 );
 
 ExpenseListItem.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
   createdAt: PropTypes.shape({ fromNow: PropTypes.func }).isRequired,

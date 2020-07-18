@@ -13,8 +13,8 @@ function sort(expenses) {
 }
 
 export default (expenses, filters) => {
-  let response;
-  if (!filters) return expenses;
+  let response = expenses;
+  if (!filters) return response;
   if (filters.text) response = filter(expenses, filters);
   if (filters.date) response = sort(expenses);
 

@@ -30,3 +30,9 @@ sh:
 
 lint:
 	docker-compose exec node yarn run lint
+
+lint-watch:
+	docker-compose exec node yarn run lint-watch
+
+docker.shell:
+	docker-compose exec node sh

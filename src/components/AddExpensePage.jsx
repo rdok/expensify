@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ExpenseForm from './ExpenseForm';
 import { addExpense } from '../actions/expenses';
 
@@ -15,5 +16,10 @@ const AddExpensePage = (props) => (
     />
   </div>
 );
+
+AddExpensePage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
+};
 
 export default connect()(AddExpensePage);

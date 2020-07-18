@@ -16,7 +16,7 @@ install:
 up:
 	docker-compose up -d
 
-watch: 
+test-watch: 
 	docker-compose exec node yarn test-watch
 
 dev-server: 

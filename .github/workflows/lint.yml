@@ -1,9 +1,9 @@
-name: test
+name: lint
 
 on: [push]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,5 +12,5 @@ jobs:
         run: make up
       - name: Install depedencies
         run: make install
-      - name: Test
-        run: make test
+      - name: Lint
+        run: make lint

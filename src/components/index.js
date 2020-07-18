@@ -1,4 +1,4 @@
-export {DashboardPage} from './../components/DashboardPage'
-export {HelpPage} from './../components/HelpPage'
-export {NotFoundPage} from './../components/NotFoundPage'
-export {Header} from './../components/Header'
+export { DashboardPage } from './DashboardPage';
+export { HelpPage } from './HelpPage';
+export { NotFoundPage } from './NotFoundPage';
+export { Header } from './Header';

@@ -19,8 +19,14 @@ up:
 watch: 
 	docker-compose exec node yarn test-watch
 
+dev-server: 
+	docker-compose exec node yarn dev-server
+
 upgrade: 
 	docker-compose exec node yarn upgrade
 
 sh:
 	docker-compose exec node sh
+
+lint:
+	docker-compose exec node yarn run lint

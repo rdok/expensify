@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-module.exports = (env, argv) => {
+module.exports = (env) => {
   let exports = {
     plugins: [
       new webpack.DefinePlugin({

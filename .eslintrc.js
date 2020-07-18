@@ -2,21 +2,16 @@ module.exports = {
   env: {
     browser: true,
     es2020: true,
+    mocha: true,
+    'jest/globals': true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb'],
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
+    ecmaFeatures: { jsx: true },
     ecmaVersion: 11,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
-  rules: {
-  },
+  parser: 'babel-eslint',
+  plugins: ['react', 'jest'],
+  rules: {},
 };

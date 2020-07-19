@@ -8,7 +8,7 @@ jest.mock('moment', () => () => 'mockedMoment');
 
 test('adds expense action', () => {
   const expense = {
-    description: 'You control your fate by the imaged reality you choose.',
+    description: 'You control your fate by the fiction you choose.',
     note: ' Maecenas nec erat mauris. ',
     amount: 2059,
   };

@@ -4,7 +4,13 @@
 ### Dev Flow
 > Singe dependency: docker 🐋
 
-- Use `make dev-server` to boot up the dev server, with live reload.
+```
+make up dev-server 
+make lint-watch # Separate tab/window
+make test-watch # Separate tab/window
+```
+
+- Use `make up` to boot up the dev server, with live reload.
 - Use `make lint-watch` to auto style.
 - Use `make test-watch` to auto test on a separate window/tab.
 - Enable git hooks to ensure compliance with tests & linter `git config core.hooksPath .meta/githooks`. CI does as well on any push.

@@ -1,3 +1,15 @@
+### Dev Flow
+dev.lint: # Recommended to delay your autosave by 3s+
+	docker-compose exec node yarn run lint-watch
+dev.shell:
+	docker-compose exec node sh
+dev.test: 
+	docker-compose exec node yarn test-watch
+dev.start: 
+	docker-compose exec node yarn dev-server
+### End Dev Flow
+
+### CI
 build:
 	docker-compose run -T -e BASENAME=/expensify node yarn run build:prod
 
@@ -16,23 +28,9 @@ install:
 up:
 	docker-compose up -d
 
-test-watch: 
-	docker-compose exec node yarn test-watch
-
-dev-server: 
-	docker-compose exec node yarn dev-server
 
 upgrade: 
 	docker-compose exec node yarn upgrade
 
-sh:
-	docker-compose exec node sh
-
 lint:
 	docker-compose exec -T node yarn run lint
-
-lint-watch:
-	docker-compose exec node yarn run lint-watch
-
-docker.shell:
-	docker-compose exec node sh

@@ -14,6 +14,7 @@ on:
         required: true
         description: Used for production environment only.
         default: production
+        
 jobs:
   CI-CD:
     runs-on: ubuntu-20.04

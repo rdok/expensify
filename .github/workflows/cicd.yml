@@ -1,4 +1,4 @@
-name: CI-CD
+name: CI/CD
 env:
   NAME: expensify
   AWS_DEFAULT_REGION: us-east-1
@@ -15,7 +15,7 @@ on:
         description: Used for production environment only.
         default: production
 jobs:
-  CI-CD:
+  cicd:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2

@@ -15,13 +15,13 @@ on:
         description: Used for production environment only.
         default: production
 jobs:
-  package-deploy:
+  ci-cd:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Yarn, Lint, Test, Build
         run: |
-          docker run --rm -u "$$(id -u)" -w "/app" -v "${PWD}:/app" \
+          docker run --rm -u "$(id -u)" -w "/app" -v "${PWD}:/app" \
             node:15.2-alpine3.12 sh -c \
               'yarn && yarn lint && yarn test && yarn build:prod'
       - name: Prepare environment variables

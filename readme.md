@@ -1,7 +1,10 @@
 # Expensify
-![Deployment](https://github.com/rdok/expensify/workflows/prod-deploy/badge.svg) ![test](https://github.com/rdok/expensify/workflows/test/badge.svg) ![lint](https://github.com/rdok/expensify/workflows/lint/badge.svg)
 
-### Dev Flow
-> Singe dependency: docker 🐋
+[![CI-CD](https://github.com/rdok/expensify/workflows/CI-CD/badge.svg)](https://github.com/rdok/expensify/actions?query=workflow%3ACI-CD)
+[![testing-site](https://img.shields.io/badge/testing-grey?style=flat-square&logo=amazon-aws)](https://testing-expensify.rdok.co.uk/)
+[![production-site](https://img.shields.io/badge/production-blue?style=flat-square&logo=amazon-aws)](https://expensify.rdok.co.uk/)
 
-See Makefile, section Dev
+
+### Development
+
+`make` 

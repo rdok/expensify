@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev-server": "webpack-dev-server",
-    "build:prod": "webpack -p --env production",
+    "build:prod": "webpack --env production",
     "test": "jest",
     "test-watch": "yarn run test -- --watch",
     "lint": "yarn eslint --ext js,jsx ./src",
@@ -41,7 +41,7 @@
     "style-loader": "^2.0.0",
     "uuid": "^8.3.1",
     "validator": "^13.5.1",
-    "webpack": "^5.10.0",
+    "webpack": "^4.44.2",
     "webpack-cli": "^4.2.0"
   },
   "devDependencies": {

@@ -1,30 +1,74 @@
-# This is a basic workflow that is manually triggered
-
-name: Manual workflow
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
+name: CI-CD
+env:
+  NAME: expensify
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  BASE_DOMAIN: rdok.co.uk
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
-    # Inputs the workflow accepts.
     inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
+      environment:
         required: true
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+        description: Used for production environment only.
+        default: production
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  CI-CD:
+    runs-on: ubuntu-20.04
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+      - uses: actions/checkout@v2
+      - name: Yarn, Lint, Test
+        run: yarn && yarn lint && yarn test
+      - name: Build
+        run: yarn build:prod
+      - name: Prepare environment variables
+        id: env
+        env:
+          ENVIRONMENT: ${{ github.event.inputs.environment }}
+        run: |
+          if [ "$ENVIRONMENT" = "" ]; then
+            ENVIRONMENT=testing
+            SUBDOMAIN="testing-"
+          fi
+          echo ::set-output name=stack-name::"rdok-${ENVIRONMENT}-${NAME}"
+          echo ::set-output name=domain::"${SUBDOMAIN}${NAME}.${BASE_DOMAIN}"
+          echo ::set-output name=deploy-bucket::"rdok-${ENVIRONMENT}-deployments-us-east-1"
+      - name: CloudFormation Package & Deploy
+        run: |
+          sam package \
+            --output-template-file packaged-template.yml \
+            --s3-prefix "${{ steps.env.outputs.stack-name }}/packages" \
+            --s3-bucket "${{ steps.env.outputs.deploy-bucket }}"
+          sam deploy \
+            --no-fail-on-empty-changeset \
+            --s3-bucket "${{ steps.env.outputs.deploy-bucket }}" \
+            --s3-prefix "${{ steps.env.outputs.stack-name }}/deployments" \
+            --template-file packaged-template.yml \
+            --stack-name ${{ steps.env.outputs.stack-name }} \
+            --capabilities CAPABILITY_IAM \
+            --parameter-overrides \
+              Route53HostedZoneId=ZSY7GT2NEDPN0 \
+              DomainName=${{ steps.env.outputs.domain }} \
+              WildcardCertificateARN=${{ secrets.WILDCARD_CERTIFICATE_ARN }}
+      - name: Website Bucket Sync
+        run: |
+          BUCKET_NAME=$( \
+            aws cloudformation describe-stacks  \
+            --stack-name ${{ steps.env.outputs.stack-name }} \
+              --query 'Stacks[0].Outputs[?OutputKey==`WebsiteBucket`].OutputValue' \
+              --output text \
+          )
+          aws s3 sync ./public s3://${BUCKET_NAME} --delete
+      - name: Cache Invalidation
+        run: |
+          DISTRIBUTION_ID=$( \
+            aws cloudformation describe-stacks  \
+            --stack-name ${{ steps.env.outputs.stack-name }} \
+            --query 'Stacks[0].Outputs[?OutputKey==`DistributionID`].OutputValue' \
+            --output text \
+          )
+          aws cloudfront create-invalidation \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/*"

@@ -12,7 +12,6 @@ on:
     inputs:
       environment:
         required: true
-        description: Used for production environment only.
         default: production
         
 jobs:

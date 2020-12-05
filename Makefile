@@ -1,3 +1,17 @@
+test: node_modules
+	make docker command='yarn test'
+test.watch: node_modules
+	make docker command='yarn test-watch'
+
+.PHONY: node_modules
+node_modules:
+	make docker command=yarn
+
+docker:
+	docker run --tty --interactive --rm --user "$$(id -u)" --workdir "/app" \
+		--volume "${PWD}:/app" --publish 8080:8080 node:15.3 \
+		$(command)
+
 ### Dev Flow
 lint: # Recommended to delay your autosave by 3s+
 	echo ''
@@ -21,8 +35,6 @@ deploy:
 cdn:
 	aws cloudfront create-invalidation  --distribution-id "${AWS_CLOUDFRONT_DISTRIBUTION_ID}" --paths "/expensify/*"
 
-test:
-	docker-compose exec -T node yarn test
 
 install:
 	docker-compose exec -T node yarn
@@ -38,8 +50,3 @@ yarn:
 	make docker command=yarn
 sh:
 	make docker command=sh
-
-docker:
-	docker run --tty --interactive --rm --user "$$(id -u)" --workdir "/app" \
-		--volume "${PWD}:/app" --publish 8080:8080 node:15.3-alpine3.12 \
-		$(command)

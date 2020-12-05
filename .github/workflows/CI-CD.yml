@@ -6,7 +6,11 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   BASE_DOMAIN: rdok.co.uk
 on:
-  workflow_dispatch 
+  workflow_dispatch:
+    inputs:
+      environment:
+        default: 'production'
+        required: true 
 jobs:
   CI-CD:
     runs-on: ubuntu-20.04

@@ -1,11 +1,13 @@
 ### Dev Flow
+lint: # Recommended to delay your autosave by 3s+
+	echo ''
 dev.lint: # Recommended to delay your autosave by 3s+
 	docker-compose exec node yarn run lint-watch
 dev.shell:
 	docker-compose exec node sh
-dev.test: 
+dev.test:
 	docker-compose exec node yarn test-watch
-dev.start: 
+dev.start:
 	docker-compose exec node yarn dev-server
 ### End Dev Flow
 
@@ -29,8 +31,15 @@ up:
 	docker-compose up -d
 
 
-upgrade: 
+upgrade:
 	docker-compose exec node yarn upgrade
 
-lint:
-	docker-compose exec -T node yarn run lint
+yarn:
+	make docker command=yarn
+sh:
+	make docker command=sh
+
+docker:
+	docker run --tty --interactive --rm --user "$$(id -u)" --workdir "/app" \
+		--volume "${PWD}:/app" --publish 8080:8080 node:15.3-alpine3.12 \
+		$(command)

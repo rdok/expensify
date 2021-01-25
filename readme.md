@@ -7,4 +7,5 @@
 
 ### Development
 
-`make` 
+See `scripts@package.json` and use `yarn`.
+

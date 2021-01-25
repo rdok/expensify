@@ -10,7 +10,6 @@ lint: node_modules
 upgrade: node_modules
 	make docker command='yarn upgrade'
 
-.PHONY: node_modules
 node_modules:
 	make docker command=yarn
 

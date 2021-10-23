@@ -1,0 +1,13 @@
+name: Build
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn --frozen-lockfile
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn build:prod

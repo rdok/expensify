@@ -7,7 +7,7 @@ env:
   BASE_DOMAIN: rdok.co.uk
 on:
   push:
-    branches: [main, resitrict-bucket-access-to-cdn]
+    branches: [main]
   workflow_dispatch:
     inputs:
       environment:

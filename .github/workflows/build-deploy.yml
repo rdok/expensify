@@ -13,7 +13,7 @@ on:
       environment:
         required: true
         description: Used for production environment only.
-        default: production
+        default: prod
 jobs:
   build-deploy:
     runs-on: ubuntu-20.04
@@ -29,12 +29,12 @@ jobs:
           ENVIRONMENT: ${{ github.event.inputs.environment }}
         run: |
           if [ "$ENVIRONMENT" = "" ]; then
-            ENVIRONMENT=testing
-            SUBDOMAIN="testing-"
+            ENVIRONMENT=test
+            SUBDOMAIN="test-"
           fi
           echo ::set-output name=stack-name::"rdok-${ENVIRONMENT}-${NAME}"
           echo ::set-output name=domain::"${SUBDOMAIN}${NAME}.${BASE_DOMAIN}"
-          echo ::set-output name=deploy-bucket::"rdok-${ENVIRONMENT}-deployments-us-east-1"
+          echo ::set-output name=deploy-bucket::"rdokos-${ENVIRONMENT}-cicd-us-east-1"
       - name: CloudFormation Package & Deploy
         run: |
           sam package \

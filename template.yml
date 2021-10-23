@@ -25,9 +25,10 @@ Resources:
           ViewerProtocolPolicy: redirect-to-https
           ForwardedValues: { QueryString: true }
         Origins:
-          - DomainName: !Select [ 1, !Split [ "//" , !GetAtt Website.WebsiteURL ] ]
-            CustomOriginConfig: { OriginProtocolPolicy: http-only }
-            Id: !Sub [ "${Input}_target_origin_id" , { Input: !Ref DomainName } ]
+          - Id: WebsiteBucket
+            DomainName: !GetAtt Website.RegionalDomainName
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CDNIdentity}"
         Enabled: true
         ViewerCertificate:
           AcmCertificateArn: !Ref WildcardCertificateARN

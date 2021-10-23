@@ -34,7 +34,7 @@ jobs:
           fi
           echo ::set-output name=stack-name::"rdok-${ENVIRONMENT}-${NAME}"
           echo ::set-output name=domain::"${SUBDOMAIN}${NAME}.${BASE_DOMAIN}"
-          echo ::set-output name=deploy-bucket::"rdok-${ENVIRONMENT}-deployments-us-east-1"
+          echo ::set-output name=deploy-bucket::"rdokos-${ENVIRONMENT}-cicd-us-east-1"
       - name: CloudFormation Package & Deploy
         run: |
           sam package \

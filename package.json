@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev-server": "webpack-dev-server",
-    "build:prod": "webpack -p --env production",
+    "build:prod": "webpack --no-devtool --env production --progress --color",
     "test": "jest",
     "test-watch": "yarn run test -- --watch",
     "lint": "yarn eslint --ext js,jsx ./src",

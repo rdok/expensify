@@ -7,7 +7,7 @@ env:
   BASE_DOMAIN: rdok.co.uk
 on:
   push:
-    branches: [main, setup-github-deployment-environments]
+    branches: [main]
   workflow_dispatch:
     inputs:
       environment:

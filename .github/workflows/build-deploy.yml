@@ -23,11 +23,13 @@ jobs:
         run: yarn --frozen-lockfile && yarn lint && yarn test
       - name: Build
         run: yarn build:prod
-      - name: Upload build artifacts
+      - name: Store build artifacts
         uses: actions/upload-artifact@v2
         with:
           name: build_artifacts-${{ github.sha }}
-          path: public
+          path: |
+            public
+            template.yml
   deploy:
     needs: [ build ]
     runs-on: ubuntu-20.04

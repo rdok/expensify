@@ -27,7 +27,7 @@ Resources:
           ForwardedValues: { QueryString: true }
         Origins:
           - Id: WebsiteBucket
-            DomainName: !GetAtt Website.RegionalDomainName
+            DomainName: !GetAtt StaticAssets.RegionalDomainName
             S3OriginConfig:
               OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CDNIdentity}"
         Enabled: true
@@ -40,29 +40,24 @@ Resources:
     Properties:
       CloudFrontOriginAccessIdentityConfig:
         Comment: !Sub "${DomainName}"
-  Website:
+  StaticAssets:
     Type: AWS::S3::Bucket
-    Properties:
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: index.html
   WebsiteAccessPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref Website
+      Bucket: !Ref StaticAssets
       PolicyDocument:
         Statement:
           Effect: Allow
           Action: s3:GetObject
           Principal: { CanonicalUser: !GetAtt CDNIdentity.S3CanonicalUserId }
-          Resource: !Sub "${Website.Arn}/*"
+          Resource: !Sub "${StaticAssets.Arn}/*"
 Outputs:
   DomainName: { Value: !Sub "https://${DomainName}" }
   WebsiteBucket:
     Description: Contains static assets of website.
-    Value: !Ref Website
-  BucketARN: { Value: !GetAtt Website.Arn }
+    Value: !Ref StaticAssets
+  BucketARN: { Value: !GetAtt StaticAssets.Arn }
   DistributionID:
     Value: !Ref CDN
     Description: CloudFront distribution id that servers files from the website.

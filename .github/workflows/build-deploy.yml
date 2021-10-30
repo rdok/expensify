@@ -7,7 +7,7 @@ env:
   BASE_DOMAIN: rdok.co.uk
 on:
   push:
-    branches: [ main, ]
+    branches: [ main,extract-build-to-its-own-job ]
   workflow_dispatch:
     inputs:
       environment:
@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: ruild_artifacts-${{ github.sha }}
+          name: build_artifacts-${{ github.sha }}
       - name: Prepare environment variables
         id: env
         env:

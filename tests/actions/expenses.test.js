@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { addExpense, editExpense, removeExpense } from '../../src/actions/expenses';
 
-jest.mock('uuid', () => () => '2077');
+jest.mock('uuid', () => ({ v4: () => '2077' }));
 jest.mock('moment', () => () => 'mockedMoment');
 
 test('adds expense action', () => {

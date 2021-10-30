@@ -29,16 +29,17 @@ module.exports = (env) => {
         },
       ],
     },
-    devtool: 'source-map',
   };
 
   if (env !== 'production') {
     exports = {
       ...exports,
       mode: 'development',
-      devtool: 'cheap-module-eval-source-map',
+      devtool: 'eval-cheap-source-map',
       devServer: {
-        contentBase: path.resolve(__dirname, 'public'),
+        static: {
+          directory: path.resolve(__dirname, 'public'),
+        },
         host: '0.0.0.0',
         hot: true,
         historyApiFallback: true,

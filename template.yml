@@ -22,11 +22,11 @@ Resources:
         DefaultRootObject: index.html
         Aliases: [ !Ref DomainName ]
         DefaultCacheBehavior:
-          TargetOriginId: WebsiteBucket
+          TargetOriginId: StaticAssets
           ViewerProtocolPolicy: redirect-to-https
           ForwardedValues: { QueryString: true }
         Origins:
-          - Id: WebsiteBucket
+          - Id: StaticAssets
             DomainName: !GetAtt StaticAssets.RegionalDomainName
             S3OriginConfig:
               OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CDNIdentity}"
@@ -54,7 +54,7 @@ Resources:
           Resource: !Sub "${StaticAssets.Arn}/*"
 Outputs:
   DomainName: { Value: !Sub "https://${DomainName}" }
-  WebsiteBucket:
+  StaticAssetsBucket:
     Description: Contains static assets of website.
     Value: !Ref StaticAssets
   BucketARN: { Value: !GetAtt StaticAssets.Arn }

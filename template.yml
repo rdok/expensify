@@ -54,10 +54,9 @@ Resources:
           Resource: !Sub "${StaticAssetsBucket.Arn}/*"
 Outputs:
   DomainName: { Value: !Sub "https://${DomainName}" }
-  StaticAssetsBucket:
+  StaticAssetsBucketName:
     Description: Contains static assets of website.
     Value: !Ref StaticAssetsBucket
-  BucketARN: { Value: !GetAtt StaticAssetsBucket.Arn }
   DistributionID:
     Value: !Ref CDN
-    Description: CloudFront distribution id that servers files from the website.
+    Description: CloudFront distribution ID; serves static assets files.

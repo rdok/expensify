@@ -63,7 +63,7 @@ jobs:
           BUCKET_NAME=$( \
             aws cloudformation describe-stacks  \
             --stack-name ${{ steps.env.outputs.stack-name }} \
-              --query 'Stacks[0].Outputs[?OutputKey==`WebsiteBucket`].OutputValue' \
+              --query 'Stacks[0].Outputs[?OutputKey==`StaticAssetsBucketName`].OutputValue' \
               --output text \
           )
           aws s3 sync ./public s3://${BUCKET_NAME} --delete

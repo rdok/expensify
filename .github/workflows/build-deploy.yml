@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-20.04
     environment:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
-      url: ${{ steps.env.outputs.domain-name }}
+      url: "https://${{ steps.env.outputs.domain }}"
     steps:
       - uses: actions/checkout@v2
       - name: Yarn, Lint, Test
@@ -63,7 +63,7 @@ jobs:
           BUCKET_NAME=$( \
             aws cloudformation describe-stacks  \
             --stack-name ${{ steps.env.outputs.stack-name }} \
-              --query 'Stacks[0].Outputs[?OutputKey==`WebsiteBucket`].OutputValue' \
+              --query 'Stacks[0].Outputs[?OutputKey==`StaticAssetsBucketName`].OutputValue' \
               --output text \
           )
           aws s3 sync ./public s3://${BUCKET_NAME} --delete

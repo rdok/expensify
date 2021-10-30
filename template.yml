@@ -19,14 +19,15 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        DefaultRootObject: index.html
         Aliases: [ !Ref DomainName ]
         DefaultCacheBehavior:
-          TargetOriginId: WebsiteBucket
+          TargetOriginId: StaticAssetsBucket
           ViewerProtocolPolicy: redirect-to-https
           ForwardedValues: { QueryString: true }
         Origins:
-          - Id: WebsiteBucket
-            DomainName: !GetAtt Website.RegionalDomainName
+          - Id: StaticAssetsBucket
+            DomainName: !GetAtt StaticAssetsBucket.RegionalDomainName
             S3OriginConfig:
               OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CDNIdentity}"
         Enabled: true
@@ -39,29 +40,23 @@ Resources:
     Properties:
       CloudFrontOriginAccessIdentityConfig:
         Comment: !Sub "${DomainName}"
-  Website:
+  StaticAssetsBucket:
     Type: AWS::S3::Bucket
-    Properties:
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: index.html
-  WebsiteAccessPolicy:
+  StaticAssetsPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref Website
+      Bucket: !Ref StaticAssetsBucket
       PolicyDocument:
         Statement:
           Effect: Allow
           Action: s3:GetObject
           Principal: { CanonicalUser: !GetAtt CDNIdentity.S3CanonicalUserId }
-          Resource: !Sub "${Website.Arn}/*"
+          Resource: !Sub "${StaticAssetsBucket.Arn}/*"
 Outputs:
-  WebsiteURL: { Value: !Sub "https://${DomainName}" }
-  WebsiteBucket:
+  DomainName: { Value: !Sub "https://${DomainName}" }
+  StaticAssetsBucketName:
     Description: Contains static assets of website.
-    Value: !Ref Website
-  BucketARN: { Value: !GetAtt Website.Arn }
+    Value: !Ref StaticAssetsBucket
   DistributionID:
     Value: !Ref CDN
-    Description: CloudFront distribution id that servers files from the website.
+    Description: CloudFront distribution ID; serves static assets files.

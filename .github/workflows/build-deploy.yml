@@ -7,7 +7,7 @@ env:
   BASE_DOMAIN: rdok.co.uk
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       environment:
@@ -15,17 +15,31 @@ on:
         description: "Allowed values: prod, test"
         default: prod
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-20.04
-    environment:
-      name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
-      url: "https://${{ steps.env.outputs.domain }}"
     steps:
       - uses: actions/checkout@v2
       - name: Yarn, Lint, Test
         run: yarn --frozen-lockfile && yarn lint && yarn test
       - name: Build
         run: yarn build:prod
+      - name: Store build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build_artifacts-${{ github.sha }}
+          path: |
+            public
+            template.yml
+  deploy:
+    needs: [ build ]
+    runs-on: ubuntu-20.04
+    environment:
+      name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
+      url: "https://${{ steps.env.outputs.domain }}"
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: build_artifacts-${{ github.sha }}
       - name: Prepare environment variables
         id: env
         env:

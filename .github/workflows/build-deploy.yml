@@ -7,7 +7,7 @@ env:
   BASE_DOMAIN: rdok.co.uk
 on:
   push:
-    branches: [main]
+    branches: [main, set-default-root-object-for-cdn]
   workflow_dispatch:
     inputs:
       environment:

@@ -22,12 +22,12 @@ Resources:
         DefaultRootObject: index.html
         Aliases: [ !Ref DomainName ]
         DefaultCacheBehavior:
-          TargetOriginId: StaticAssets
+          TargetOriginId: StaticAssetsBucket
           ViewerProtocolPolicy: redirect-to-https
           ForwardedValues: { QueryString: true }
         Origins:
-          - Id: StaticAssets
-            DomainName: !GetAtt StaticAssets.RegionalDomainName
+          - Id: StaticAssetsBucket
+            DomainName: !GetAtt StaticAssetsBucket.RegionalDomainName
             S3OriginConfig:
               OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CDNIdentity}"
         Enabled: true
@@ -40,24 +40,24 @@ Resources:
     Properties:
       CloudFrontOriginAccessIdentityConfig:
         Comment: !Sub "${DomainName}"
-  StaticAssets:
+  StaticAssetsBucket:
     Type: AWS::S3::Bucket
-  WebsiteAccessPolicy:
+  StaticAssetsPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref StaticAssets
+      Bucket: !Ref StaticAssetsBucket
       PolicyDocument:
         Statement:
           Effect: Allow
           Action: s3:GetObject
           Principal: { CanonicalUser: !GetAtt CDNIdentity.S3CanonicalUserId }
-          Resource: !Sub "${StaticAssets.Arn}/*"
+          Resource: !Sub "${StaticAssetsBucket.Arn}/*"
 Outputs:
   DomainName: { Value: !Sub "https://${DomainName}" }
   StaticAssetsBucket:
     Description: Contains static assets of website.
-    Value: !Ref StaticAssets
-  BucketARN: { Value: !GetAtt StaticAssets.Arn }
+    Value: !Ref StaticAssetsBucket
+  BucketARN: { Value: !GetAtt StaticAssetsBucket.Arn }
   DistributionID:
     Value: !Ref CDN
     Description: CloudFront distribution id that servers files from the website.

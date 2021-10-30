@@ -12,11 +12,14 @@ on:
     inputs:
       environment:
         required: true
-        description: Used for production environment only.
+        description: "Allowed values: prod, test"
         default: prod
 jobs:
   build-deploy:
     runs-on: ubuntu-20.04
+    environment:
+      name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
+      url: ${{ steps.env.outputs.domain-name }}
     steps:
       - uses: actions/checkout@v2
       - name: Yarn, Lint, Test
@@ -28,10 +31,13 @@ jobs:
         env:
           ENVIRONMENT: ${{ github.event.inputs.environment }}
         run: |
-          if [ "$ENVIRONMENT" = "" ]; then
-            ENVIRONMENT=test
-            SUBDOMAIN="test-"
+          ENVIRONMENT=${ENVIRONMENT:-test}
+          if [ "$ENVIRONMENT" != "test" && "$ENVIRONMENT" != "prod" ]; then
+            printf '%s\n' "ENVIRONMENT is not in accepted range: test, prod." >&2
+            exit 1
           fi
+          if [ "$ENVIRONMENT" = "test" ]; then SUBDOMAIN="test-"; fi
+
           echo ::set-output name=stack-name::"rdok-${ENVIRONMENT}-${NAME}"
           echo ::set-output name=domain::"${SUBDOMAIN}${NAME}.${BASE_DOMAIN}"
           echo ::set-output name=deploy-bucket::"rdokos-${ENVIRONMENT}-cicd-us-east-1"

@@ -7,7 +7,7 @@ env:
   BASE_DOMAIN: rdok.co.uk
 on:
   push:
-    branches: [ main,extract-build-to-its-own-job ]
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       environment:

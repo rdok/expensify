@@ -58,7 +58,7 @@ Resources:
           Principal: { CanonicalUser: !GetAtt CDNIdentity.S3CanonicalUserId }
           Resource: !Sub "${Website.Arn}/*"
 Outputs:
-  WebsiteURL: { Value: !Sub "https://${DomainName}" }
+  DomainName: { Value: !Sub "https://${DomainName}" }
   WebsiteBucket:
     Description: Contains static assets of website.
     Value: !Ref Website

@@ -11,11 +11,11 @@
     "build:prod": "webpack --no-devtool --env production --progress --color",
     "test": "jest",
     "test-watch": "jest --watch",
-    "lint": "eslint --ext js,jsx ./src",
+    "lint": "eslint ./src",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write ."
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.0",
@@ -28,6 +28,7 @@
     "css-loader": "^6.5.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^25.2.2",
     "eslint-plugin-jsx-a11y": "^6.3.1",
@@ -38,6 +39,7 @@
     "node-notifier": "^10.0.0",
     "node-sass": "^6.0.1",
     "normalize.css": "^8.0.1",
+    "prettier": "^2.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.0.0",
     "react-addons-shallow-compare": "^15.6.2",
@@ -56,7 +58,6 @@
     "validator": "^13.6.0",
     "webpack": "^5.61.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.4.0",
-    "prettier": "^2.4.1"
+    "webpack-dev-server": "^4.4.0"
   }
 }

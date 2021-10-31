@@ -1,13 +1,12 @@
-import { Provider } from 'react-redux';
-import React from 'react';
-import PropTypes from 'prop-types';
-import AppRouter from './routers/AppRouter';
+import { Provider } from "react-redux";
+import React from "react";
+import PropTypes from "prop-types";
+import AppRouter from "./routers/AppRouter";
 
 const provider = ({ store }) => (
   <Provider store={store}>
-    {' '}
-    <AppRouter />
-    {' '}
+    {" "}
+    <AppRouter />{" "}
   </Provider>
 );
 

@@ -1,10 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { DateRangePicker } from 'react-dates';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { DateRangePicker } from "react-dates";
 import {
-  setEndDate, setStartDate, setTextFilter, sortByAmount, sortByDate,
-} from '../actions/filters';
+  setEndDate,
+  setStartDate,
+  setTextFilter,
+  sortByAmount,
+  sortByDate,
+} from "../actions/filters";
 
 class ExpensesListFilter extends React.Component {
   constructor(props) {
@@ -16,11 +20,11 @@ class ExpensesListFilter extends React.Component {
     const { dispatch } = this.props;
     dispatch(setStartDate(startDate));
     dispatch(setEndDate(endDate));
-  }
+  };
 
   onFocusChange = (calendarFocused) => {
     this.setState(() => ({ calendarFocused }));
-  }
+  };
 
   render() {
     const { filters, dispatch } = this.props;
@@ -30,16 +34,18 @@ class ExpensesListFilter extends React.Component {
         <input
           type="text"
           value={filters.text}
-          onChange={(e) => { dispatch(setTextFilter(e.target.value)); }}
+          onChange={(e) => {
+            dispatch(setTextFilter(e.target.value));
+          }}
         />
 
         <select
           value={filters.sortBy}
           onChange={(e) => {
             switch (e.target.value) {
-              case 'date':
+              case "date":
                 return dispatch(sortByDate());
-              case 'amount':
+              case "amount":
                 return dispatch(sortByAmount());
               default:
                 throw Error;

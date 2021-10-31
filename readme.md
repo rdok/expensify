@@ -4,11 +4,9 @@
 [![test-site][test_site_badge]][test_site]
 [![prod-site][prod_site_badge]][prod_site]
 
-
 ### Development
 
 See `scripts@package.json` and use `yarn`.
-
 
 [test_site]: https://test-expensify.rdok.co.uk/
 [test_site_badge]: https://img.shields.io/badge/test-grey?style=flat-square&logo=amazon-aws

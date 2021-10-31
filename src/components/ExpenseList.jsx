@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import ExpenseListItem from './ExpenseListItem';
-import selectExpenses from '../selectors/expenses';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import ExpenseListItem from "./ExpenseListItem";
+import selectExpenses from "../selectors/expenses";
 
 const ExpenseList = (props) => {
   const { expenses } = props;
@@ -10,9 +10,7 @@ const ExpenseList = (props) => {
     <div>
       <h2> Expense List </h2>
       {expenses.map((expense) => {
-        const {
-          id, description, amount, createdAt,
-        } = expense;
+        const { id, description, amount, createdAt } = expense;
 
         return (
           <ExpenseListItem

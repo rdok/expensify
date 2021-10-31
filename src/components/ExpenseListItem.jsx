@@ -1,11 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const ExpenseListItem = ({
-  id, description, amount, createdAt,
-}) => (
+const ExpenseListItem = ({ id, description, amount, createdAt }) => (
   <div>
     <h3>
       <NavLink to={`/edit/${id}`}>{description}</NavLink>

@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import ExpenseForm from './ExpenseForm';
-import { editExpense, removeExpense } from '../actions/expenses';
-import ExpenseListItem from './ExpenseListItem';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import ExpenseForm from "./ExpenseForm";
+import { editExpense, removeExpense } from "../actions/expenses";
+import ExpenseListItem from "./ExpenseListItem";
 
 const EditExpensePage = ({ expense, dispatch, history }) => (
   <div>
@@ -12,14 +12,14 @@ const EditExpensePage = ({ expense, dispatch, history }) => (
       expense={expense}
       onSubmit={({ id }) => {
         dispatch(editExpense({ id }));
-        history.push('/');
+        history.push("/");
       }}
     />
     <button
       type="button"
       onClick={() => {
         dispatch(removeExpense({ expense }));
-        history.push('/');
+        history.push("/");
       }}
     >
       Remove

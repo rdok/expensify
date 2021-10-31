@@ -1,21 +1,21 @@
-import React from 'react';
-import moment from 'moment';
-import PropTypes from 'prop-types';
+import React from "react";
+import moment from "moment";
+import PropTypes from "prop-types";
 
-import 'react-dates/initialize';
-import 'react-with-styles';
-import 'react-dates/lib/css/_datepicker.css';
+import "react-dates/initialize";
+import "react-with-styles";
+import "react-dates/lib/css/_datepicker.css";
 
-import { SingleDatePicker } from 'react-dates';
-import ExpenseListItem from './ExpenseListItem';
+import { SingleDatePicker } from "react-dates";
+import ExpenseListItem from "./ExpenseListItem";
 
 export default class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: '',
-      note: '',
-      amount: '',
+      description: "",
+      note: "",
+      amount: "",
       createdAt: moment(),
       calendarFocused: false,
     };
@@ -31,12 +31,12 @@ export default class ExpenseForm extends React.Component {
   onDescriptionChange = (e) => {
     const description = e.target.value;
     this.setState(() => ({ description }));
-  }
+  };
 
   onNoteChange = (e) => {
     const note = e.target.value;
     this.setState(() => ({ note }));
-  }
+  };
 
   onAmountChange = (e) => {
     const amount = e.target.value;
@@ -44,29 +44,31 @@ export default class ExpenseForm extends React.Component {
     if (!amount || amount.match(/^\d+(\.\d{0,2})?$/)) {
       this.setState(() => ({ amount }));
     }
-  }
+  };
 
   onCalendarFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }));
-  }
+  };
 
   onDateChange = (createdAt) => {
     if (createdAt) {
       this.setState({ createdAt });
     }
-  }
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
 
     const { state } = this;
 
-    const requiredFields = ['description', 'amount'];
-    const errors = requiredFields.filter((field) => !state[field]).map((field) => {
-      let humanField = field.charAt(0).toUpperCase();
-      humanField += field.toLowerCase().slice(1);
-      return { field: `${humanField} is required.` };
-    });
+    const requiredFields = ["description", "amount"];
+    const errors = requiredFields
+      .filter((field) => !state[field])
+      .map((field) => {
+        let humanField = field.charAt(0).toUpperCase();
+        humanField += field.toLowerCase().slice(1);
+        return { field: `${humanField} is required.` };
+      });
 
     this.setState({ errors });
 
@@ -74,9 +76,7 @@ export default class ExpenseForm extends React.Component {
 
     const { props } = this;
     const { expense } = props;
-    const {
-      id, description, amount, createdAt, note,
-    } = expense;
+    const { id, description, amount, createdAt, note } = expense;
 
     props.onSubmit({
       id,
@@ -85,7 +85,7 @@ export default class ExpenseForm extends React.Component {
       createdAt,
       note,
     });
-  }
+  };
 
   render() {
     const { state, props } = this;

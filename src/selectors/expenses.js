@@ -1,12 +1,18 @@
 function filter(expenses, { text, startDate, endDate }) {
   return expenses.filter((expense) => {
     const search = text ? text.toLowerCase() : undefined;
-    const textMatch = search ? ['description', 'note']
-      .find((field) => expense[field].toLowerCase().includes(search)) !== undefined
+    const textMatch = search
+      ? ["description", "note"].find((field) =>
+          expense[field].toLowerCase().includes(search)
+        ) !== undefined
       : true;
 
-    const startDateMatch = startDate ? startDate.isSameOrBefore(expense.createdAt) : true;
-    const endDateMatch = endDate ? endDate.isSameOrAfter(expense.createdAt) : true;
+    const startDateMatch = startDate
+      ? startDate.isSameOrBefore(expense.createdAt)
+      : true;
+    const endDateMatch = endDate
+      ? endDate.isSameOrAfter(expense.createdAt)
+      : true;
 
     return textMatch && startDateMatch && endDateMatch;
   });
@@ -35,11 +41,11 @@ export default (expenses, filters) => {
 
   response = filter(expenses, filters);
 
-  if (filters.sortBy && filters.sortBy === 'date') {
+  if (filters.sortBy && filters.sortBy === "date") {
     response = sortByCreatedAt(expenses);
   }
 
-  if (filters.sortBy && filters.sortBy === 'amount') {
+  if (filters.sortBy && filters.sortBy === "amount") {
     response = sortByAmount(expenses);
   }
 

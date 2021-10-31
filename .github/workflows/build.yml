@@ -8,6 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn --frozen-lockfile
+      - run: yarn prettier
       - run: yarn lint
       - run: yarn test
       - run: yarn build:prod

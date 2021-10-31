@@ -7,7 +7,7 @@ env:
   BASE_DOMAIN: rdok.co.uk
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
     inputs:
       environment:
@@ -31,7 +31,7 @@ jobs:
             public
             template.yml
   deploy:
-    needs: [ build ]
+    needs: [build]
     runs-on: ubuntu-20.04
     environment:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}

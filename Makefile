@@ -9,3 +9,6 @@ start:
 
 prettier-fix:
 	yarn prettier:fix
+
+test-watch:
+	yarn test:watch

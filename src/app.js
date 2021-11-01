@@ -12,7 +12,7 @@ const store = configureStore();
 
 store.subscribe(() => {
   const state = store.getState();
-  getVisibleExpenses(state.expenses, state.filters);
+  return getVisibleExpenses(state.expenses, state.filters);
 });
 
 store.dispatch(

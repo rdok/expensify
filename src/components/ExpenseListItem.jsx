@@ -8,14 +8,8 @@ const ExpenseListItem = ({ id, description, amount, createdAt }) => (
     <h3>
       <NavLink to={`/edit/${id}`}>{description}</NavLink>
     </h3>
-    <p>
-      Amount:
-      {amount}
-    </p>
-    <p>
-      Created At:
-      {createdAt.fromNow()}
-    </p>
+    <p>Amount: {amount}</p>
+    <p>Created {createdAt.fromNow()}</p>
     <hr />
   </div>
 );

@@ -10,7 +10,7 @@
     "start": "webpack-dev-server",
     "build:prod": "webpack --no-devtool --env production --progress --color",
     "test": "jest",
-    "test-watch": "jest --watch",
+    "test:watch": "jest --watch --verbose",
     "lint": "eslint ./src",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write ."

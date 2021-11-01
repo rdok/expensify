@@ -13,5 +13,10 @@ module.exports = {
   },
   parser: "@babel/eslint-parser",
   plugins: ["react", "jest"],
-  rules: {},
+  rules: {
+    "no-underscore-dangle": [
+      "error",
+      { allow: ["__REDUX_DEVTOOLS_EXTENSION__"] },
+    ],
+  },
 };

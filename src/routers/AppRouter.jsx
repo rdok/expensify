@@ -8,9 +8,8 @@ import NotFoundPage from "../components/NotFoundPage";
 import Header from "../components/Header";
 import AddExpensePage from "../components/AddExpensePage";
 
-/* eslint-disable no-undef */
+/* global BASENAME */
 const basename = BASENAME;
-/* eslint-enable */
 
 const AppRouter = () => (
   <BrowserRouter basename={basename}>

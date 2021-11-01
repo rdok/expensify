@@ -4,34 +4,49 @@ import {
   editExpense,
   removeExpense,
 } from "../../src/actions/expenses";
+import { makeExpense, makeExpenseWithoutNote } from "../factories";
 
 jest.mock("uuid", () => ({ v4: () => "2077" }));
 jest.mock("moment", () => () => "mockedMoment");
 
 test("adds expense action", () => {
-  const expense = {
-    description: "You control your fate by the fiction you choose.",
-    note: " Maecenas nec erat mauris. ",
-    amount: 2059,
-  };
-
-  const expectedExpense = { id: "2077", createdAt: "mockedMoment", ...expense };
+  const expense = makeExpense();
   const action = addExpense(expense);
-
   expect(action).toEqual({
     type: "ADD_EXPENSE",
-    expense: { ...expectedExpense },
+    expense: {
+      id: "2077",
+      createdAt: "mockedMoment",
+      ...expense,
+    },
+  });
+});
+
+test("adds expense without a note", () => {
+  const expense = makeExpenseWithoutNote();
+  const action = addExpense(expense);
+  expect(action).toEqual({
+    type: "ADD_EXPENSE",
+    expense: {
+      id: "2077",
+      createdAt: "mockedMoment",
+      ...expense,
+      note: "",
+    },
   });
 });
 
 test("edits expense action", () => {
   const data = {
     description: "Reality",
-    note: " Maecenas",
+    note: "Maecenas",
     amount: 2059,
   };
 
-  const expense = { id: "2077", createdAt: moment() };
+  const expense = {
+    id: "2077",
+    createdAt: moment(),
+  };
 
   const action = editExpense(expense, data);
 

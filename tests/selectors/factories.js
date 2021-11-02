@@ -33,11 +33,17 @@ export function makeExpensesFilterableByNote() {
 
 export function makeExpensesUnsortableByDate() {
   const latestExpense = makeExpense({ createdAt: moment().year(2077) });
-
   const unsortedExpenses = [
     makeExpense({ createdAt: moment().year(1990) }),
     latestExpense,
   ];
+
+  return { unsortedExpenses, latestExpense };
+}
+
+export function makeExpensesUnsortableByAmount() {
+  const latestExpense = makeExpense({ amount: 1000 });
+  const unsortedExpenses = [makeExpense({ amount: 1 }), latestExpense];
 
   return { unsortedExpenses, latestExpense };
 }

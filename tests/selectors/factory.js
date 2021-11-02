@@ -1,3 +1,5 @@
+import moment from "moment";
+
 import { makeExpense } from "../_factories/expense-factory";
 
 export function makeExpensesFilterableByDescription() {
@@ -27,4 +29,15 @@ export function makeExpensesFilterableByNote() {
   const partialFilter = "una";
 
   return { expenses, partialFilter, expectedExpense };
+}
+
+export function makeExpensesUnsortableByDate() {
+  const latestExpense = makeExpense({ createdAt: moment().year(2077) });
+
+  const unsortedExpenses = [
+    makeExpense({ createdAt: moment().year(1990) }),
+    latestExpense,
+  ];
+
+  return { unsortedExpenses, latestExpense };
 }

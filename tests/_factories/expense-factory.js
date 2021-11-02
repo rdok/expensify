@@ -8,11 +8,12 @@ export function makeExpenseWithFillable(overwrite = {}) {
   return { description, note, amount };
 }
 
-export function makeExpense(overwrite) {
+export function makeExpense(overwrite = {}) {
   const fillable = makeExpenseWithFillable(overwrite);
+  const createdAt = overwrite.createdAt ?? faker.date.past();
   return {
     ...fillable,
     id: faker.datatype.uuid(),
-    createdAt: faker.date.past(),
+    createdAt,
   };
 }

@@ -1,5 +1,6 @@
 import moment from "moment";
 import selectExpenses from "../../src/selectors/expenses";
+import { makeExpense } from "../_factories/expense-factory";
 
 const expenseAlpha = {
   id: "1990",
@@ -27,6 +28,21 @@ describe.each([
     const filtered = selectExpenses(expenses, filters);
     expect(filtered.length).toEqual(1);
     expect(filtered[0]).toHaveProperty("id", expectedId);
+  });
+});
+
+describe("Filter expenses by partial text", () => {
+  test("using description", () => {
+    const fillable = { description: "Pioneer", note: "lunar" };
+    const expectedExpense = makeExpense(fillable);
+
+    const filtered = selectExpenses(
+      [expectedExpense, makeExpense({ description: "Venus", note: "planet" })],
+      { text: "ionee" }
+    );
+
+    expect(filtered.length).toEqual(1);
+    expect(filtered[0]).toHaveProperty("id", expectedExpense.id);
   });
 });
 

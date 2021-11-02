@@ -3,7 +3,7 @@ import {
   makeAddExpenseWithoutANote,
   makeEditExpense,
   makeRemoveExpense,
-} from "../factories/expense-action-factory";
+} from "../_factories/expense-action-factory";
 
 test("adds expense action", () => {
   const { fillable, addExpense, mockedId, mockedCreatedAt } = makeAddExpense();

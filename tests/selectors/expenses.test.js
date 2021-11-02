@@ -24,17 +24,6 @@ test(`Sort expenses by date`, () => {
   expect(sortedExpenses[0].id).toEqual(latestExpense.id);
 });
 
-// test(`Sort expenses by amount`, () => {
-//   const defaultExpenses = selectExpenses(expenses);
-//   expect(defaultExpenses.length).toEqual(2);
-//   expect(defaultExpenses[0].id).toEqual(expenseBeta.id);
-//
-//   const filters = { sortBy: "amount" };
-//   const sortedExpenses = selectExpenses(expenses, filters);
-//   expect(sortedExpenses.length).toEqual(2);
-//   expect(sortedExpenses[0].id).toEqual(expenseAlpha.id);
-// });
-//
 // test(`Filter expenses by startDate`, () => {
 //   let filters = { startDate: expenseBeta.createdAt };
 //   let filtered = selectExpenses(expenses, filters);

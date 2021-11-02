@@ -3,7 +3,12 @@ import moment from "moment";
 
 export const addExpense = (expense) => ({
   type: "ADD_EXPENSE",
-  expense: { id: uuid(), createdAt: moment(), ...expense },
+  expense: {
+    id: uuid(),
+    createdAt: moment(),
+    ...expense,
+    note: expense.note ?? "",
+  },
 });
 
 export const editExpense = (expense, data) => ({

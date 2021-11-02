@@ -75,11 +75,10 @@ export default class ExpenseForm extends React.Component {
     if (errors.length !== 0) throw new Error(errors);
 
     const { props } = this;
-    const { expense } = props;
-    const { id, description, amount, createdAt, note } = expense;
+
+    const { description, amount, createdAt, note } = this.state;
 
     props.onSubmit({
-      id,
       description,
       amount: parseFloat(amount) * 100,
       createdAt,
@@ -125,8 +124,12 @@ export default class ExpenseForm extends React.Component {
   }
 }
 
+ExpenseForm.defaultProps = {
+  expense: undefined,
+};
+
 ExpenseForm.propTypes = {
-  expense: PropTypes.instanceOf(ExpenseListItem).isRequired,
-  onSubmit: PropTypes.instanceOf(ExpenseListItem).isRequired,
+  expense: PropTypes.oneOf([PropTypes.instanceOf(ExpenseListItem).isRequired]),
+  onSubmit: PropTypes.func.isRequired,
   submitBtnValue: PropTypes.string.isRequired,
 };

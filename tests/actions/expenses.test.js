@@ -1,51 +1,49 @@
-import moment from "moment";
 import {
-  addExpense,
-  editExpense,
-  removeExpense,
-} from "../../src/actions/expenses";
-
-jest.mock("uuid", () => ({ v4: () => "2077" }));
-jest.mock("moment", () => () => "mockedMoment");
+  makeAddExpense,
+  makeAddExpenseWithoutANote,
+  makeEditExpense,
+  makeRemoveExpense,
+} from "../factories/expense-action-factory";
 
 test("adds expense action", () => {
-  const expense = {
-    description: "You control your fate by the fiction you choose.",
-    note: " Maecenas nec erat mauris. ",
-    amount: 2059,
-  };
-
-  const expectedExpense = { id: "2077", createdAt: "mockedMoment", ...expense };
-  const action = addExpense(expense);
-
+  const { fillable, addExpense, mockedId, mockedCreatedAt } = makeAddExpense();
+  const action = addExpense(fillable);
   expect(action).toEqual({
     type: "ADD_EXPENSE",
-    expense: { ...expectedExpense },
+    expense: {
+      id: mockedId,
+      createdAt: mockedCreatedAt,
+      ...fillable,
+    },
   });
 });
 
+test("adds empty note when adding expense action without a note", () => {
+  const { fillable, addExpense } = makeAddExpenseWithoutANote();
+  const action = addExpense(fillable);
+  expect(action).toMatchObject({ expense: { note: "" } });
+});
+
 test("edits expense action", () => {
-  const data = {
-    description: "Reality",
-    note: " Maecenas",
-    amount: 2059,
-  };
-
-  const expense = { id: "2077", createdAt: moment() };
-
-  const action = editExpense(expense, data);
+  const { fillable, expense, editExpense } = makeEditExpense();
+  const action = editExpense(expense, fillable);
 
   expect(action).toEqual({
     type: "EDIT_EXPENSE",
-    expense: { ...expense, ...data },
+    expense: {
+      id: expense.id,
+      createdAt: expense.createdAt,
+      ...fillable,
+    },
   });
 });
 
 test("removes expense action", () => {
-  const action = removeExpense({ id: "2077" });
+  const { expense, removeExpense } = makeRemoveExpense();
+  const action = removeExpense(expense);
 
   expect(action).toEqual({
-    id: "2077",
     type: "REMOVE_EXPENSE",
+    id: expense.id,
   });
 });

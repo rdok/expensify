@@ -106,5 +106,6 @@ dist
 .tern-port
 
 
-public/
+public/*
 !public/index.html
+!public/favicon.ico

@@ -9,19 +9,9 @@ const ExpenseList = (props) => {
   return (
     <div>
       <h2> Expense List </h2>
-      {expenses.map((expense) => {
-        const { id, description, amount, createdAt } = expense;
-
-        return (
-          <ExpenseListItem
-            key={expense.id}
-            id={id}
-            description={description}
-            amount={amount}
-            createdAt={createdAt}
-          />
-        );
-      })}
+      {expenses.map((expense) => (
+        <ExpenseListItem key={expense.id} expense={expense} />
+      ))}
     </div>
   );
 };

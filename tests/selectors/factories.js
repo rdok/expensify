@@ -24,11 +24,33 @@ export function makeExpensesFilterableByDescription() {
 }
 
 export function makeExpensesFilterableByNote() {
-  const expectedExpense = makeExpense({ note: "lunar" });
+  const expectedExpense = makeExpense({ note: "Lunar" });
   const expenses = [expectedExpense, makeExpense({ note: "planet" })];
   const partialFilter = "una";
 
   return { expenses, partialFilter, expectedExpense };
+}
+
+export function makeExpensesUnfilteredByStartDate() {
+  const expectedExpense = makeExpense({ createdAt: moment().year(2077) });
+  const unfilteredExpenses = [
+    expectedExpense,
+    makeExpense({ createdAt: moment().year(2021) }),
+  ];
+  const startDate = moment().year(2076);
+
+  return { unfilteredExpenses, startDate, expectedExpense };
+}
+
+export function makeExpensesUnfilteredByEndDate() {
+  const expectedExpense = makeExpense({ createdAt: moment().year(2021) });
+  const unfilteredExpenses = [
+    expectedExpense,
+    makeExpense({ createdAt: moment().year(2077) }),
+  ];
+  const endDate = moment().year(2076);
+
+  return { unfilteredExpenses, endDate, expectedExpense };
 }
 
 export function makeExpensesUnsortableByDate() {

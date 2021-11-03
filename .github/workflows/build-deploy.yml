@@ -19,8 +19,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Yarn, Lint, Test
-        run: yarn --frozen-lockfile && yarn lint && yarn test
+      - run: yarn --frozen-lockfile
+      - run: yarn prettier && yarn lint && yarn test
       - name: Build
         run: yarn build:prod
       - name: Store build artifacts

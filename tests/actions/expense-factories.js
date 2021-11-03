@@ -1,6 +1,9 @@
 import moment from "moment";
 import { v4 as uuid } from "uuid";
-import { makeExpense, makeExpenseWithFillable } from "./expense-factory";
+import {
+  makeExpense,
+  makeExpenseWithFillable,
+} from "../_factories/expense-factory";
 
 jest.mock("uuid");
 jest.mock("moment");

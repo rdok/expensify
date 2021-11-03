@@ -28,7 +28,7 @@ const EditExpensePage = ({ expense, dispatch, history }) => (
 );
 
 EditExpensePage.propTypes = {
-  expense: PropTypes.exact({ ...ExpensePropType }).isRequired,
+  expense: PropTypes.exact(ExpensePropType).isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };

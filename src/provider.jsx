@@ -5,8 +5,7 @@ import AppRouter from "./routers/AppRouter";
 
 const provider = ({ store }) => (
   <Provider store={store}>
-    {" "}
-    <AppRouter />{" "}
+    <AppRouter />
   </Provider>
 );
 

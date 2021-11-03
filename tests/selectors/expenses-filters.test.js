@@ -27,18 +27,16 @@ describe("When filtering expenses", () => {
   describe("With partial note", () => {
     test("remove all but a single expense", () => {
       const { expenses, partialFilter } = makeExpensesFilterableByNote();
-      const filteredExpenses = selectExpenses(expenses, {
-        text: partialFilter,
-      });
+      const text = { text: partialFilter };
+      const filteredExpenses = selectExpenses(expenses, text);
       expect(filteredExpenses.length).toEqual(1);
     });
 
     test("returns the correct expense", () => {
       const { expenses, partialFilter, expectedExpense } =
         makeExpensesFilterableByNote();
-      const filteredExpenses = selectExpenses(expenses, {
-        text: partialFilter,
-      });
+      const text = { text: partialFilter };
+      const filteredExpenses = selectExpenses(expenses, text);
       expect(filteredExpenses[0]).toHaveProperty("id", expectedExpense.id);
     });
   });

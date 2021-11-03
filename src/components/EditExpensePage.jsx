@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ExpenseForm from "./ExpenseForm";
 import { editExpense, removeExpense } from "../actions/expenses";
-import ExpenseListItem from "./ExpenseListItem";
+import { ExpensePropType } from "../types";
 
 const EditExpensePage = ({ expense, dispatch, history }) => (
   <div>
@@ -28,9 +28,9 @@ const EditExpensePage = ({ expense, dispatch, history }) => (
 );
 
 EditExpensePage.propTypes = {
-  expense: PropTypes.instanceOf(ExpenseListItem).isRequired,
+  expense: PropTypes.exact(ExpensePropType).isRequired,
   dispatch: PropTypes.func.isRequired,
-  history: PropTypes.string.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
 const mapStateToProps = ({ expenses }, props) => ({

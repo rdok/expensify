@@ -2,8 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
+import { ExpensePropType } from "../types";
 
-const ExpenseListItem = ({ id, description, amount, createdAt }) => (
+const ExpenseListItem = ({
+  expense: { description, id, createdAt, amount },
+}) => (
   <div>
     <h3>
       <NavLink to={`/edit/${id}`}>{description}</NavLink>
@@ -15,10 +18,7 @@ const ExpenseListItem = ({ id, description, amount, createdAt }) => (
 );
 
 ExpenseListItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  amount: PropTypes.number.isRequired,
-  createdAt: PropTypes.shape({ fromNow: PropTypes.func }).isRequired,
+  expense: PropTypes.exact(ExpensePropType).isRequired,
 };
 
 export default connect()(ExpenseListItem);

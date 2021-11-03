@@ -7,25 +7,19 @@ import "react-with-styles";
 import "react-dates/lib/css/_datepicker.css";
 
 import { SingleDatePicker } from "react-dates";
-import ExpenseListItem from "./ExpenseListItem";
+import { ExpensePropType } from "../types";
 
 export default class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      description: "",
-      note: "",
-      amount: "",
-      createdAt: moment(),
+      ...props.expense,
+      amount: props.expense.amount
+        ? (props.expense.amount / 100).toString()
+        : "",
       calendarFocused: false,
     };
-
-    if (props.expense) {
-      this.state = {
-        ...props.expense,
-        amount: (props.expense.amount / 100).toString(),
-      };
-    }
   }
 
   onDescriptionChange = (e) => {
@@ -125,11 +119,19 @@ export default class ExpenseForm extends React.Component {
 }
 
 ExpenseForm.defaultProps = {
-  expense: undefined,
+  expense: {
+    description: "",
+    note: "",
+    amount: undefined,
+    createdAt: moment(),
+  },
 };
 
 ExpenseForm.propTypes = {
-  expense: PropTypes.oneOf([PropTypes.instanceOf(ExpenseListItem).isRequired]),
+  expense: PropTypes.exact({
+    ...ExpensePropType,
+    amount: PropTypes.number,
+  }),
   onSubmit: PropTypes.func.isRequired,
   submitBtnValue: PropTypes.string.isRequired,
 };

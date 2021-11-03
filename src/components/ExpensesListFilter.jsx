@@ -10,6 +10,10 @@ import {
   sortByDate,
 } from "../actions/filters";
 
+import "react-dates/initialize";
+import "react-with-styles";
+import "react-dates/lib/css/_datepicker.css";
+
 class ExpensesListFilter extends React.Component {
   constructor(props) {
     super(props);

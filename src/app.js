@@ -19,7 +19,7 @@ store.dispatch(
   addExpense({
     description: "Gas bill",
     amount: 200,
-    createdAt: moment().subtract(1, "day"),
+    createdAt: moment().subtract(1, "hour"),
   })
 );
 
@@ -27,7 +27,7 @@ store.dispatch(
   addExpense({
     description: "Water bill",
     amount: 100,
-    createdAt: moment().subtract(3, "day"),
+    createdAt: moment().subtract(3, "hour"),
   })
 );
 
@@ -35,7 +35,7 @@ store.dispatch(
   addExpense({
     description: "Rent",
     amount: 109500,
-    createdAt: moment().subtract(5, "day"),
+    createdAt: moment().subtract(2, "month"),
   })
 );
 

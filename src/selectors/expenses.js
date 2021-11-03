@@ -35,19 +35,19 @@ function sortByAmount(expenses) {
 }
 
 export default (expenses, filters) => {
-  let response = expenses;
+  let processedExpenses = expenses;
 
-  if (!filters) return response;
+  if (!filters) return processedExpenses;
 
-  response = filter(expenses, filters);
+  processedExpenses = filter(expenses, filters);
 
   if (filters.sortBy && filters.sortBy === "date") {
-    response = sortByCreatedAt(expenses);
+    processedExpenses = sortByCreatedAt(processedExpenses);
   }
 
   if (filters.sortBy && filters.sortBy === "amount") {
-    response = sortByAmount(expenses);
+    processedExpenses = sortByAmount(processedExpenses);
   }
 
-  return response;
+  return processedExpenses;
 };

@@ -12,3 +12,6 @@ prettier-fix:
 
 test-watch:
 	yarn test:watch
+
+test:
+	yarn test

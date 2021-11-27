@@ -12,3 +12,9 @@ prettier-fix:
 
 test-watch:
 	yarn test:watch
+
+test:
+	yarn test
+
+lint:
+	yarn lint

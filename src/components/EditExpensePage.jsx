@@ -10,15 +10,15 @@ const EditExpensePage = ({ expense, dispatch, history }) => (
     <ExpenseForm
       submitBtnValue="Update"
       expense={expense}
-      onSubmit={({ id }) => {
-        dispatch(editExpense({ id }));
+      onSubmit={(form) => {
+        dispatch(editExpense(...form));
         history.push("/");
       }}
     />
     <button
       type="button"
       onClick={() => {
-        dispatch(removeExpense({ expense }));
+        dispatch(removeExpense(expense));
         history.push("/");
       }}
     >

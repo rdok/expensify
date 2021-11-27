@@ -42,8 +42,5 @@ test("removes expense action", () => {
   const { expense, removeExpense } = makeRemoveExpense();
   const action = removeExpense(expense);
 
-  expect(action).toEqual({
-    type: "REMOVE_EXPENSE",
-    id: expense.id,
-  });
+  expect(action).toEqual({ type: "REMOVE_EXPENSE", expense });
 });

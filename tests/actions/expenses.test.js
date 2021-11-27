@@ -1,9 +1,4 @@
-import {
-  makeAddExpense,
-  makeAddExpenseWithoutANote,
-  makeEditExpense,
-  makeRemoveExpense,
-} from "./expense-factories";
+import { makeAddExpense, makeAddExpenseWithoutANote, makeEditExpense, makeRemoveExpense } from "./expense-factories";
 
 test("adds expense action", () => {
   const { fillable, addExpense, mockedId, mockedCreatedAt } = makeAddExpense();
@@ -13,8 +8,8 @@ test("adds expense action", () => {
     expense: {
       id: mockedId,
       createdAt: mockedCreatedAt,
-      ...fillable,
-    },
+      ...fillable
+    }
   });
 });
 
@@ -33,8 +28,8 @@ test("edits expense action", () => {
     expense: {
       id: expense.id,
       createdAt: expense.createdAt,
-      ...fillable,
-    },
+      ...fillable
+    }
   });
 });
 
@@ -42,8 +37,5 @@ test("removes expense action", () => {
   const { expense, removeExpense } = makeRemoveExpense();
   const action = removeExpense(expense);
 
-  expect(action).toEqual({
-    type: "REMOVE_EXPENSE",
-    id: expense.id,
-  });
+  expect(action).toEqual({ type: "REMOVE_EXPENSE", expense });
 });

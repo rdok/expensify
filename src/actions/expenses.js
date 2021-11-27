@@ -16,4 +16,4 @@ export const editExpense = (expense, data) => ({
   expense: { id: expense.id, createdAt: expense.createdAt, ...data },
 });
 
-export const removeExpense = ({ id }) => ({ type: "REMOVE_EXPENSE", id });
+export const removeExpense = (expense) => ({ type: "REMOVE_EXPENSE", expense });

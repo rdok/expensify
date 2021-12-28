@@ -16,7 +16,7 @@ on:
         default: prod
 jobs:
   check:
-    uses: rdok/aws-sam-ts/.github/workflows/check.yml@main
+    uses: rdok/expensify/.github/workflows/check.yml@main
   build:
     needs: [check]
     runs-on: ubuntu-latest

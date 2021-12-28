@@ -39,6 +39,7 @@ jobs:
     environment:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
       url: "https://${{ steps.env.outputs.domain }}"
+    concurrency: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
     steps:
       - uses: actions/download-artifact@v2
         with:

@@ -1,4 +1,4 @@
-name: Build Deploy
+name: Deploy
 env:
   NAME: expensify
   AWS_DEFAULT_REGION: us-east-1

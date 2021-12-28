@@ -43,7 +43,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install Yarn packages
       - name: Get Yarn cache directory
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"

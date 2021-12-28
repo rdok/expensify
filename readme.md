@@ -1,6 +1,7 @@
 # Expensify
 
-[![build-deploy][build_deploy_badge]][build_deploy]
+[![check][check_badge]][check_workflow]
+[![deploy][deploy_badge]][deploy_workflow]
 [![test-site][test_site_badge]][test_site]
 [![prod-site][prod_site_badge]][prod_site]
 
@@ -12,5 +13,7 @@ See `scripts@package.json` and use `yarn`.
 [test_site_badge]: https://img.shields.io/badge/test-grey?style=flat-square&logo=amazon-aws
 [prod_site]: https://expensify.rdok.co.uk/
 [prod_site_badge]: https://img.shields.io/badge/prod-blue?style=flat-square&logo=amazon-aws
-[build_deploy_badge]: https://github.com/rdok/expensify/actions/workflows/build-deploy.yml/badge.svg
-[build_deploy]: https://github.com/rdok/expensify/actions/workflows/build-deploy.yml
+[check_badge]: https://github.com/rdok/expensify/actions/workflows/check.yml/badge.svg
+[deploy_badge]: https://github.com/rdok/expensify/actions/workflows/deploy.yml/badge.svg
+[check_workflow]: https://github.com/rdok/expensify/actions/workflows/check.yml
+[deploy_workflow]: https://github.com/rdok/expensify/actions/workflows/deploy.yml

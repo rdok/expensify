@@ -1,4 +1,4 @@
-name: Build Deploy
+name: Deploy
 env:
   NAME: expensify
   AWS_DEFAULT_REGION: us-east-1
@@ -15,8 +15,11 @@ on:
         description: "Allowed values: prod, test"
         default: prod
 jobs:
+  check:
+    uses: rdok/expensify/.github/workflows/check.yml@main
   build:
-    runs-on: ubuntu-20.04
+    needs: [check]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: yarn --frozen-lockfile
@@ -32,10 +35,11 @@ jobs:
             template.yml
   deploy:
     needs: [build]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     environment:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
       url: "https://${{ steps.env.outputs.domain }}"
+    concurrency: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
     steps:
       - uses: actions/download-artifact@v2
         with:

@@ -41,7 +41,7 @@
     "node-notifier": "^10.0.0",
     "normalize.css": "^8.0.1",
     "prettier": "^2.4.1",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.0",
     "react": "^16.0.0",
     "react-addons-shallow-compare": "^15.6.2",
     "react-dates": "^21.8.0",

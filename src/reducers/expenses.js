@@ -1,6 +1,6 @@
 const defaultState = [];
 
-export default (state = defaultState, { type, expense }) => {
+export default ({ type, expense }, state = defaultState) => {
   switch (type) {
     case "ADD_EXPENSE":
       return [...state, expense];

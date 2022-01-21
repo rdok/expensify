@@ -8,8 +8,8 @@ const defaultState = {
 };
 
 export default (
-  state = defaultState,
-  { type, text = "", startDate = undefined, endDate = undefined }
+  { type, text = "", startDate = undefined, endDate = undefined },
+  state = defaultState
 ) => {
   switch (type) {
     case "SET_TEXT_FILTER":

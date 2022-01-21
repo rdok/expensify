@@ -5,7 +5,7 @@ import ExpenseListItem from "./ExpenseListItem";
 import selectExpenses from "../selectors/expenses";
 import { ExpensePropType } from "../types";
 
-const ExpenseList = (props) => {
+function ExpenseList(props) {
   const { expenses } = props;
   return (
     <div>
@@ -15,7 +15,7 @@ const ExpenseList = (props) => {
       ))}
     </div>
   );
-};
+}
 
 ExpenseList.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.exact(ExpensePropType).isRequired)
@@ -23,7 +23,7 @@ ExpenseList.propTypes = {
 };
 
 const mapStateToProps = ({ expenses, filters }) => ({
-  expenses: selectExpenses(expenses, filters),
+  expenses: selectExpenses(filters, expenses),
 });
 
 export default connect(mapStateToProps)(ExpenseList);

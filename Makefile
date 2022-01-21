@@ -18,3 +18,7 @@ test:
 
 lint:
 	yarn lint
+
+
+update-all:
+	yarn upgrade-interactive --latest

@@ -22,8 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn --frozen-lockfile
-      - run: yarn prettier && yarn lint && yarn test
+      - name: Setup Node with cache
+        uses: actions/setup-node@v2
+        with: { cache: "yarn" }
+      - name: Install Yarn packages
+        run: yarn install --frozen-lockfile
       - name: Build
         run: yarn build:prod
       - name: Store build artifacts

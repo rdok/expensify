@@ -20,5 +20,5 @@ lint:
 	yarn lint
 
 
-update-all:
+maintenance-update:
 	yarn upgrade-interactive --latest

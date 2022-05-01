@@ -30,7 +30,7 @@ jobs:
       - name: Build
         run: yarn build:prod
       - name: Store build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build_artifacts-${{ github.sha }}
           path: |

@@ -44,7 +44,7 @@ jobs:
       url: "https://${{ steps.env.outputs.domain }}"
     concurrency: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: build_artifacts-${{ github.sha }}
       - name: Prepare environment variables
